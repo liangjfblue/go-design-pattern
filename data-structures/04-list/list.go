@@ -9,9 +9,10 @@ package _4_list
 type Lister interface {
 	Size() int
 	IsEmpty() bool
+	Next() *Node
 	AddFirst(interface{})
 	AddLast(interface{})
-	Remove(int) interface{}
+	Remove(*Node) interface{}
 	RemoveFirst() interface{}
 	RemoveLast() interface{}
 	Contains(interface{}) bool
@@ -21,4 +22,9 @@ type Lister interface {
 	RemoveAllElement(interface{}) bool
 	HasRing() int
 	String() string
+}
+
+type Node struct {
+	Value interface{}
+	Next  *Node
 }
