@@ -10,6 +10,7 @@ import (
 	"bytes"
 	"fmt"
 	queue2 "go-design-pattern/data-structures/02-queue"
+	"go-design-pattern/data-structures/utils"
 )
 
 type queue struct {
@@ -19,7 +20,7 @@ type queue struct {
 
 func New(cap uint32) queue2.Queuer {
 	return &queue{
-		data: make([]interface{}, min2(cap)),
+		data: make([]interface{}, utils.Min2(cap)),
 	}
 }
 
@@ -87,7 +88,7 @@ func (q *queue) resize(scala bool) {
 	if scala {
 		count = count + 1
 	}
-	nEm := make([]interface{}, min2(count))
+	nEm := make([]interface{}, utils.Min2(count))
 
 	if q.tail > q.head {
 		copy(nEm, q.data[q.head:q.tail])
@@ -100,18 +101,6 @@ func (q *queue) resize(scala bool) {
 	q.tail = q.count
 	q.data = nEm
 	return
-}
-
-//min2 最近的2的倍数
-func min2(v uint32) uint32 {
-	v--
-	v |= v >> 1
-	v |= v >> 2
-	v |= v >> 4
-	v |= v >> 8
-	v |= v >> 16
-	v++
-	return v
 }
 
 //String 打印队列

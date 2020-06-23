@@ -14,14 +14,15 @@ func TestArray_String(t *testing.T) {
 		arr.AddLast(i)
 	}
 
-	for i := 8; i < 10; i++ {
+	for i := 8; i < 20; i++ {
 		arr.AddFirst(i)
 	}
 
-	arr.Set(1, 100)
+	for i := 1; i < 20; i++ {
+		arr.RemoveFirst()
+	}
 
 	t.Log(arr.String())
-	t.Log(arr.FindAll(0))
 }
 
 func BenchmarkArray_Add(b *testing.B) {
@@ -34,7 +35,7 @@ func BenchmarkArray_Add(b *testing.B) {
 	b.StopTimer()
 }
 
-//BenchmarkArray_RemoveFirst-4          93024               110025 ns/op
+//BenchmarkArray_RemoveFirst-4       67414             72225 ns/op
 func BenchmarkArray_RemoveFirst(b *testing.B) {
 	arr := New(10)
 
@@ -49,7 +50,7 @@ func BenchmarkArray_RemoveFirst(b *testing.B) {
 	b.StopTimer()
 }
 
-//BenchmarkArray_RemoveLast-4          2714934               501 ns/op
+//BenchmarkArray_RemoveLast-4     10619440               157 ns/op
 func BenchmarkArray_RemoveLast(b *testing.B) {
 	arr := New(10)
 

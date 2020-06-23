@@ -9,6 +9,11 @@ package _1_array
 import (
 	"bytes"
 	"fmt"
+	"go-design-pattern/data-structures/utils"
+)
+
+var (
+	initCap = 16
 )
 
 type array struct {
@@ -17,6 +22,10 @@ type array struct {
 }
 
 func New(cap int) Arrayer {
+	if cap < initCap {
+		cap = initCap
+	}
+
 	return &array{
 		size: 0,
 		data: make([]interface{}, cap),
@@ -45,7 +54,7 @@ func (a *array) Add(idx int, e interface{}) {
 	}
 
 	if len(a.data) == a.size {
-		a.resize(a.size * 2)
+		a.resize(int(utils.Min2(uint32(a.size) + 1)))
 	}
 
 	for i := a.size - 1; i >= idx; i-- {
@@ -147,7 +156,7 @@ func (a *array) Remove(idx int) interface{} {
 	a.data[a.size] = nil
 	a.size--
 
-	if a.size == len(a.data)>>4 && len(a.data)>>2 != 0 {
+	if a.size == len(a.data)>>2 && len(a.data)>>1 != 0 {
 		a.resize(len(a.data) / 2)
 	}
 
