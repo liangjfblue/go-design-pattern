@@ -4,7 +4,7 @@
  * @create on 2020/6/23
  * @version 1.0
  */
-package single
+package singlelist
 
 import (
 	"testing"
